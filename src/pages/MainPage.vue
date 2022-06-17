@@ -24,7 +24,7 @@
         <q-input
           v-model="currentSearchphrase"
           class="gt-sm"
-          label="Search for movies, TV-shows, actors,..."
+          :label="searchFieldPlaceholder"
           dark
           dense
           color="accent"
@@ -45,7 +45,7 @@
           v-model="currentGenre"
           :options="genreOptions"
           @update:model-value="updateFilteredItems"
-          label="Select genre"
+          :label="genreSelectPlaceholder"
           color="accent"
           style="width: 10%"
         />
@@ -78,12 +78,12 @@
               <LogoImg class="drawer-el" />
             </q-item>
             <q-item class="row justify-center default-margin-top">
-              <AppDescription class="drawer-el" />
+              <AppDescription />
             </q-item>
             <q-item class="row justify-center default-margin-top">
               <q-input
                 v-model="currentSearchphrase"
-                label="Search for movies, TV-shows, actors,..."
+                :label="searchFieldPlaceholder"
                 dark
                 dense
                 color="accent"
@@ -118,7 +118,7 @@
                 v-model="currentGenre"
                 :options="genreOptions"
                 @update:model-value="updateFilteredItems"
-                label="Select genre"
+                :label="genreSelectPlaceholder"
                 color="accent"
                 class="drawer-el"
               />
@@ -149,6 +149,7 @@ import ItemList from 'components/ItemList.vue';
 import AboutSection from '../components/AboutSection.vue';
 import AppDescription from '../components/AppDescription.vue';
 import LogoImg from 'src/components/LogoImg.vue';
+import appConfig from 'src/appConfig';
 
 export default defineComponent({
   name: 'MainLayout',
@@ -163,6 +164,9 @@ export default defineComponent({
 
     const drawerOpen = ref(false);
     const aboutDialogOpen = ref(false);
+
+    const searchFieldPlaceholder = appConfig.defaults.searchfieldPlaceholder;
+    const genreSelectPlaceholder = appConfig.defaults.genreSelectPlaceholder;
 
     const genreOptions = ref(staticJsonItemService.getAllGenres());
     const typeOptions = ref([
@@ -200,6 +204,8 @@ export default defineComponent({
       filteredItems,
       updateFilteredItems,
       itemListComponent,
+      searchFieldPlaceholder,
+      genreSelectPlaceholder,
     };
   },
 });
