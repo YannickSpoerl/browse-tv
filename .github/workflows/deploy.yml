@@ -1,0 +1,22 @@
+name: deploy_on_push
+
+on:
+  push:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build application
+        run: quasar build
+      
+      - name: Push to gh-pages
+        run: npm run deploy
