@@ -2,8 +2,9 @@
   <div class="row justify-center default-margin-top" v-if="showBanner">
     <LogoImg style="max-height: inherit" />
   </div>
-  <AppDescription v-if="showDescription" />
-
+  <div v-if="showDescription" class="row justify-center default-margin-top">
+    <AppDescription />
+  </div>
   <div class="row justify-center default-margin-top">
     <p>
       2022 -

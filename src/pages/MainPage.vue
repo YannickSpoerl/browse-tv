@@ -7,6 +7,7 @@
           <LogoImg class="header-el" />
           <q-space />
         </div>
+        <q-space class="lt-md" />
         <LogoImg class="lt-md header-el" />
         <q-space class="lt-md" />
         <q-btn-toggle
@@ -71,15 +72,14 @@
         </q-btn>
       </q-toolbar>
       <q-drawer v-model="drawerOpen" overlay>
-        <q-list
-          style="width: inherit; height: 100%"
-          class="column justify-between"
-        >
+        <q-list style="height: 100%" class="column justify-between">
           <div class="col">
             <q-item class="row justify-center">
-              <LogoImg style="width: 90%" />
+              <LogoImg class="drawer-el" />
             </q-item>
-            <AppDescription />
+            <q-item class="row justify-center default-margin-top">
+              <AppDescription class="drawer-el" />
+            </q-item>
             <q-item class="row justify-center default-margin-top">
               <q-input
                 v-model="currentSearchphrase"
@@ -87,7 +87,7 @@
                 dark
                 dense
                 color="accent"
-                style="width: 80%"
+                class="drawer-el"
                 @update:model-value="updateFilteredItems"
                 debounce="1000"
                 clearable
@@ -107,7 +107,7 @@
                 @update:model-value="updateFilteredItems"
                 toggle-color="accent"
                 :ripple="false"
-                style="width: 80%"
+                class="drawer-el"
               />
             </q-item>
             <q-item class="row justify-center default-margin-top">
@@ -120,7 +120,7 @@
                 @update:model-value="updateFilteredItems"
                 label="Select genre"
                 color="accent"
-                style="width: 80%"
+                class="drawer-el"
               />
             </q-item>
           </div>
@@ -218,5 +218,9 @@ export default defineComponent({
 
 .header-el {
   max-height: 56px;
+}
+
+.drawer-el {
+  width: 90%;
 }
 </style>

@@ -1,6 +1,4 @@
-<template>
-  <div class="row justify-center">{{ appDescription }}</div>
-</template>
+<template>{{ appDescription }}</template>
 <script>
 import { defineComponent } from 'vue';
 import appConfig from 'src/appConfig';

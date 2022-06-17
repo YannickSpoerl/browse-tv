@@ -55,6 +55,7 @@ import ListElement from 'components/ListElement.vue';
 import { defineComponent, ref, PropType } from 'vue';
 import { Item } from 'components/models';
 import DetailCard from '../components/DetailCard.vue';
+import appConfig from 'src/appConfig';
 
 export default defineComponent({
   name: 'ItemList',
@@ -66,8 +67,9 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const maxResults = ref(16);
-    const resultsExtension = ref(16);
+    const maxResults = ref(appConfig.defaults.itemsVisible);
+    const resultsExtension = ref(appConfig.defaults.itemsLoadMore);
+
     const detailDialogOpen = ref(false);
     const selectedItem = ref({} as Item);
 
