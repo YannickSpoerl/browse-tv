@@ -1,10 +1,10 @@
 <template>
-  <div class="row justify-center" v-if="showBanner" style="margin-top: 25px">
+  <div class="row justify-center default-margin-top" v-if="showBanner">
     <LogoImg style="max-height: inherit" />
   </div>
   <AppDescription v-if="showDescription" />
 
-  <div class="row justify-center">
+  <div class="row justify-center default-margin-top">
     <p>
       2022 -
       <a href="https://yannickspoerl.de" target="_blank" class="text-accent"
@@ -38,8 +38,7 @@
   <div class="row justify-center">
     <p>
       Check out the code on
-      <!-- TODO: repo link -->
-      <a href="https://yannickspoerl.de" target="_blank" class="text-accent"
+      <a :href="appRepositoryLink" target="_blank" class="text-accent"
         >Github</a
       >
     </p>
@@ -49,6 +48,7 @@
 import { defineComponent } from 'vue';
 import AppDescription from './AppDescription.vue';
 import LogoImg from './LogoImg.vue';
+import appConfig from 'src/appConfig';
 
 export default defineComponent({
   name: 'AboutSection',
@@ -68,6 +68,13 @@ export default defineComponent({
       type: Number,
       required: false,
     },
+  },
+  setup() {
+    const appRepositoryLink = appConfig.repository;
+
+    return {
+      appRepositoryLink,
+    };
   },
 });
 </script>

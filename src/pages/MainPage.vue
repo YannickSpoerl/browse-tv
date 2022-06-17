@@ -80,7 +80,7 @@
               <LogoImg style="width: 90%" />
             </q-item>
             <AppDescription />
-            <q-item class="row justify-center" style="margin-top: 20px">
+            <q-item class="row justify-center default-margin-top">
               <q-input
                 v-model="currentSearchphrase"
                 label="Search for movies, TV-shows, actors,..."
@@ -97,7 +97,7 @@
                 </template>
               </q-input>
             </q-item>
-            <q-item class="row justify-center" style="margin-top: 20px">
+            <q-item class="row justify-center default-margin-top">
               <q-btn-toggle
                 v-model="currentType"
                 flat
@@ -110,7 +110,7 @@
                 style="width: 80%"
               />
             </q-item>
-            <q-item class="row justify-center" style="margin-top: 20px">
+            <q-item class="row justify-center default-margin-top">
               <q-select
                 dark
                 clearable
