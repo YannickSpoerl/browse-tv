@@ -66,10 +66,17 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const maxResults = ref(20);
-    const resultsExtension = ref(20);
+    const maxResults = ref(16);
+    const resultsExtension = ref(16);
     const detailDialogOpen = ref(false);
     const selectedItem = ref({} as Item);
+
+    function onItemListChange(): void {
+      selectedItem.value = {} as Item;
+      detailDialogOpen.value = false;
+      maxResults.value = resultsExtension.value;
+      window.scrollTo(0, 0);
+    }
 
     function toggleItem(item: Item): void {
       detailDialogOpen.value = true;
@@ -83,6 +90,7 @@ export default defineComponent({
       resultsExtension,
       detailDialogOpen,
       selectedItem,
+      onItemListChange,
     };
   },
 });

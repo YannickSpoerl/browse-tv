@@ -1,10 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-header class="appHeader">
-      <q-toolbar
-        style="max-height: 56px; padding-right: 0"
-        class="row justify-between"
-      >
+      <q-toolbar class="header-el row justify-between">
         <div class="col-3 header-el row gt-sm">
           <q-space />
           <LogoImg class="header-el" />
@@ -127,18 +124,19 @@
               />
             </q-item>
           </div>
-          <AboutSection
-            :show-banner="false"
-            :show-description="false" /></q-list
-      ></q-drawer>
+          <AboutSection :show-banner="false" :show-description="false" />
+        </q-list>
+      </q-drawer>
     </q-header>
+
     <q-dialog v-model="aboutDialogOpen">
       <q-card id="aboutDialogCard" dark>
         <AboutSection />
       </q-card>
     </q-dialog>
+
     <q-page-container>
-      <ItemList :items="filteredItems" />
+      <ItemList :items="filteredItems" ref="itemListComponent" />
     </q-page-container>
   </q-layout>
 </template>
@@ -161,6 +159,8 @@ export default defineComponent({
     LogoImg,
   },
   setup() {
+    const itemListComponent = ref<InstanceType<typeof ItemList> | null>(null);
+
     const drawerOpen = ref(false);
     const aboutDialogOpen = ref(false);
 
@@ -186,6 +186,7 @@ export default defineComponent({
         );
 
       drawerOpen.value = false;
+      itemListComponent.value?.onItemListChange();
     }
 
     return {
@@ -198,6 +199,7 @@ export default defineComponent({
       currentSearchphrase,
       filteredItems,
       updateFilteredItems,
+      itemListComponent,
     };
   },
 });
@@ -215,6 +217,6 @@ export default defineComponent({
 }
 
 .header-el {
-  max-height: inherit;
+  max-height: 56px;
 }
 </style>
