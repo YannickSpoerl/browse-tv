@@ -9,7 +9,7 @@
     "lint": "eslint --ext .js,.ts,.vue ./",
     "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
     "test": "echo \"No test specified\" && exit 0",
-    "deploy": "push-dir --dir=dist/spa --remote=gh-pages --branch=master"
+    "deploy": "push-dir --dir=dist/spa --branch=gh-pages"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
