@@ -1,0 +1,18 @@
+// app global css in SCSS form
+.q-app {
+  font: 300;
+  background-color: $primary;
+}
+
+.q-drawer__content {
+  background-color: $primary;
+}
+
+.q-layout {
+  background-color: $primary;
+}
+
+.q-page-container {
+  max-width: 1000px;
+  margin: auto;
+}
