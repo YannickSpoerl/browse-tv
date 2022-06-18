@@ -85,8 +85,8 @@ quasar build
 
 - [x] Add missing items
 - [x] Finish refactor and cleanup
-- [ ] Migrate from .json to sqlite
-- [ ] Lightweight backend to connect to and play movies
+- [ ] Add file-path to database.json
+- [x] Lightweight backend to connect to and play movies
 - [ ] Script to add new items
 - [ ] Url-params to encode selected filters
 
