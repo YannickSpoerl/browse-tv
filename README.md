@@ -84,7 +84,7 @@ quasar build
 ## Tasks
 
 - [x] Add missing items
-- [ ] Finish refactor and cleanup
+- [x] Finish refactor and cleanup
 - [ ] Migrate from .json to sqlite
 - [ ] Lightweight backend to connect to and play movies
 - [ ] Script to add new items

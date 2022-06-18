@@ -36,7 +36,7 @@
           <AppDescription />
         </div>
         <div
-          class="default-margin-top column justify-between"
+          class="default-margin-top column justify-between no-wrap"
           style="height: 30%"
         >
           <FilterElements
