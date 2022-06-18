@@ -1,17 +1,13 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header class="appHeader">
+  <MainLayout ref="mainLayoutComponent">
+    <template v-slot:desktop-toolbar>
       <q-toolbar class="header-el row justify-between">
-        <div class="col-3 header-el row gt-sm">
+        <div class="col-3 header-el row">
           <q-space />
           <LogoImg class="header-el" />
           <q-space />
         </div>
-        <q-space class="lt-md" />
-        <LogoImg class="lt-md header-el" />
-        <q-space class="lt-md" />
         <q-btn-toggle
-          class="gt-sm"
           v-model="currentType"
           flat
           dark
@@ -23,7 +19,6 @@
         />
         <q-input
           v-model="currentSearchphrase"
-          class="gt-sm"
           :label="searchFieldPlaceholder"
           dark
           dense
@@ -39,7 +34,6 @@
         </q-input>
         <q-select
           dark
-          class="gt-sm"
           clearable
           dense
           v-model="currentGenre"
@@ -57,88 +51,75 @@
           label="About"
           @click="aboutDialogOpen = true"
         />
-
-        <q-btn
-          aria-label="Open drawer menu"
-          flat
-          stretch
-          dark
-          style="width: 56px"
-          class="lt-md"
-          @click="drawerOpen = !drawerOpen"
-          dense
-        >
-          <q-icon name="menu" />
-        </q-btn>
       </q-toolbar>
-      <q-drawer v-model="drawerOpen" overlay>
-        <q-list style="height: 100%" class="column justify-between">
-          <div class="col">
-            <q-item class="row justify-center">
-              <LogoImg class="drawer-el" />
-            </q-item>
-            <q-item class="row justify-center default-margin-top">
-              <AppDescription />
-            </q-item>
-            <q-item class="row justify-center default-margin-top">
-              <q-input
-                v-model="currentSearchphrase"
-                :label="searchFieldPlaceholder"
-                dark
-                dense
-                color="accent"
-                class="drawer-el"
-                @update:model-value="updateFilteredItems"
-                debounce="1000"
-                clearable
-              >
-                <template v-slot:prepend>
-                  <q-icon name="search" />
-                </template>
-              </q-input>
-            </q-item>
-            <q-item class="row justify-center default-margin-top">
-              <q-btn-toggle
-                v-model="currentType"
-                flat
-                dark
-                stretch
-                :options="typeOptions"
-                @update:model-value="updateFilteredItems"
-                toggle-color="accent"
-                :ripple="false"
-                class="drawer-el"
-              />
-            </q-item>
-            <q-item class="row justify-center default-margin-top">
-              <q-select
-                dark
-                clearable
-                dense
-                v-model="currentGenre"
-                :options="genreOptions"
-                @update:model-value="updateFilteredItems"
-                :label="genreSelectPlaceholder"
-                color="accent"
-                class="drawer-el"
-              />
-            </q-item>
-          </div>
-          <AboutSection :show-banner="false" :show-description="false" />
-        </q-list>
-      </q-drawer>
-    </q-header>
+    </template>
 
-    <q-dialog v-model="aboutDialogOpen">
-      <q-card id="aboutDialogCard" dark>
-        <AboutSection />
-      </q-card>
-    </q-dialog>
+    <template v-slot:mobile-drawer>
+      <q-list style="height: 100%" class="column justify-between">
+        <div class="col">
+          <q-item class="row justify-center">
+            <LogoImg class="drawer-el" />
+          </q-item>
+          <q-item class="row justify-center default-margin-top">
+            <AppDescription />
+          </q-item>
+          <q-item class="row justify-center default-margin-top">
+            <q-input
+              v-model="currentSearchphrase"
+              :label="searchFieldPlaceholder"
+              dark
+              dense
+              color="accent"
+              class="drawer-el"
+              @update:model-value="updateFilteredItems"
+              debounce="1000"
+              clearable
+            >
+              <template v-slot:prepend>
+                <q-icon name="search" />
+              </template>
+            </q-input>
+          </q-item>
+          <q-item class="row justify-center default-margin-top">
+            <q-btn-toggle
+              v-model="currentType"
+              flat
+              dark
+              stretch
+              :options="typeOptions"
+              @update:model-value="updateFilteredItems"
+              toggle-color="accent"
+              :ripple="false"
+              class="drawer-el"
+            />
+          </q-item>
+          <q-item class="row justify-center default-margin-top">
+            <q-select
+              dark
+              clearable
+              dense
+              v-model="currentGenre"
+              :options="genreOptions"
+              @update:model-value="updateFilteredItems"
+              :label="genreSelectPlaceholder"
+              color="accent"
+              class="drawer-el"
+            />
+          </q-item>
+        </div>
+        <AboutSection :show-banner="false" :show-description="false" />
+      </q-list>
+    </template>
 
-    <q-page-container>
+    <template v-slot:content>
+      <q-dialog v-model="aboutDialogOpen">
+        <q-card id="aboutDialogCard" dark>
+          <AboutSection />
+        </q-card>
+      </q-dialog>
       <ItemList :items="filteredItems" ref="itemListComponent" />
-    </q-page-container>
-  </q-layout>
+    </template>
+  </MainLayout>
 </template>
 
 <script lang="ts">
@@ -149,18 +130,23 @@ import ItemList from 'components/ItemList.vue';
 import AboutSection from '../components/AboutSection.vue';
 import AppDescription from '../components/AppDescription.vue';
 import LogoImg from 'src/components/LogoImg.vue';
+import MainLayout from 'src/layouts/MainLayout.vue';
 import appConfig from 'src/appConfig';
 
 export default defineComponent({
-  name: 'MainLayout',
+  name: 'MainPage',
   components: {
     ItemList,
     AboutSection,
     AppDescription,
     LogoImg,
+    MainLayout,
   },
   setup() {
     const itemListComponent = ref<InstanceType<typeof ItemList> | null>(null);
+    const mainLayoutComponent = ref<InstanceType<typeof MainLayout> | null>(
+      null
+    );
 
     const drawerOpen = ref(false);
     const aboutDialogOpen = ref(false);
@@ -191,6 +177,7 @@ export default defineComponent({
 
       drawerOpen.value = false;
       itemListComponent.value?.onItemListChange();
+      mainLayoutComponent.value?.closeDrawer();
     }
 
     return {
