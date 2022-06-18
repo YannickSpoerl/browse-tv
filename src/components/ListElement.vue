@@ -1,5 +1,6 @@
 <template>
   <q-img
+    spinner-color="accent"
     class="el-preview"
     :alt="el.title + ' cover image'"
     loading="lazy"

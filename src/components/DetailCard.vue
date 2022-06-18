@@ -10,6 +10,7 @@
     </div>
     <q-card-section horizontal style="height: 100%">
       <q-img
+        spinner-color="accent"
         :alt="el.title + ' cover image'"
         class="col"
         style="height: 70%; margin: auto"
