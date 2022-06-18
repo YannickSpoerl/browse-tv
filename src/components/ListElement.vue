@@ -31,7 +31,7 @@ export default defineComponent({
   max-width: 21%;
   min-width: 150px;
   max-height: 360px;
-  margin: 20px;
+  margin: 10px;
   cursor: pointer;
   width: 100%;
   border-radius: 5px;
