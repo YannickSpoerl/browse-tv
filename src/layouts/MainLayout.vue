@@ -2,11 +2,6 @@
   <q-layout view="lHh Lpr lFf">
     <q-header class="gt-sm">
       <q-toolbar class="header-el row justify-between">
-        <div class="col-3 header-el row">
-          <q-space />
-          <LogoImg class="header-el" />
-          <q-space />
-        </div>
         <slot name="desktop-toolbar"> </slot>
       </q-toolbar>
     </q-header>
@@ -31,7 +26,12 @@
     </q-header>
 
     <q-drawer v-model="drawerOpen" class="text-secondary" overlay>
-      <slot name="mobile-drawer"></slot>
+      <div
+        class="column justify-between"
+        style="height: 100%; width: 80%; margin: auto"
+      >
+        <slot name="mobile-drawer"></slot>
+      </div>
     </q-drawer>
 
     <q-page-container>
@@ -55,6 +55,7 @@ export default defineComponent({
 
     function closeDrawer(): void {
       drawerOpen.value = false;
+      console.log('pls close drawers2');
     }
 
     function openDrawer(): void {

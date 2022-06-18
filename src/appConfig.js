@@ -4,7 +4,7 @@ export default {
   defaults: {
     itemsVisible: 16,
     itemsLoadMore: 16,
-    searchfieldPlaceholder: 'Search for movies, TV-shows, actors,...',
+    searchfieldPlaceholder: 'Search for titles, actors, ...',
     genreSelectPlaceholder: 'Select genre',
   },
 };

@@ -1,116 +1,58 @@
 <template>
   <MainLayout ref="mainLayoutComponent">
     <template v-slot:desktop-toolbar>
-      <q-btn-toggle
-        v-model="currentType"
-        flat
-        dark
-        stretch
-        :options="typeOptions"
-        @update:model-value="updateFilteredItems"
-        toggle-color="accent"
-        :ripple="false"
-      />
-      <q-input
-        v-model="currentSearchphrase"
-        :label="searchFieldPlaceholder"
-        dark
-        dense
-        color="accent"
-        style="width: 20%; margin: 0 40px 0; min-width: 150px"
-        @update:model-value="updateFilteredItems"
-        debounce="1000"
-        clearable
-      >
-        <template v-slot:prepend>
-          <q-icon name="search" />
-        </template>
-      </q-input>
-      <q-select
-        dark
-        clearable
-        dense
-        v-model="currentGenre"
-        :options="genreOptions"
-        @update:model-value="updateFilteredItems"
-        :label="genreSelectPlaceholder"
-        color="accent"
-        style="width: 10%"
-      />
-      <q-space />
+      <div class="col row header-el">
+        <div class="col-3 row justify-evenly header-el">
+          <LogoImg />
+        </div>
+        <div style="max-width: 1000px" class="col row justify-evenly">
+          <FilterElements
+            v-model:type="currentType"
+            v-model:searchphrase="currentSearchphrase"
+            v-model:genre="currentGenre"
+            @update="updateFilteredItems"
+          />
+        </div>
+      </div>
       <q-btn
+        class="col-auto"
         stretch
         flat
-        class="gt-sm"
         label="About"
         @click="aboutDialogOpen = true"
       />
-    </template>
 
-    <template v-slot:mobile-drawer>
-      <q-list style="height: 100%" class="column justify-between">
-        <div class="col">
-          <q-item class="row justify-center">
-            <LogoImg class="drawer-el" />
-          </q-item>
-          <q-item class="row justify-center default-margin-top">
-            <AppDescription />
-          </q-item>
-          <q-item class="row justify-center default-margin-top">
-            <q-input
-              v-model="currentSearchphrase"
-              :label="searchFieldPlaceholder"
-              dark
-              dense
-              color="accent"
-              class="drawer-el"
-              @update:model-value="updateFilteredItems"
-              debounce="1000"
-              clearable
-            >
-              <template v-slot:prepend>
-                <q-icon name="search" />
-              </template>
-            </q-input>
-          </q-item>
-          <q-item class="row justify-center default-margin-top">
-            <q-btn-toggle
-              v-model="currentType"
-              flat
-              dark
-              stretch
-              :options="typeOptions"
-              @update:model-value="updateFilteredItems"
-              toggle-color="accent"
-              :ripple="false"
-              class="drawer-el"
-            />
-          </q-item>
-          <q-item class="row justify-center default-margin-top">
-            <q-select
-              dark
-              clearable
-              dense
-              v-model="currentGenre"
-              :options="genreOptions"
-              @update:model-value="updateFilteredItems"
-              :label="genreSelectPlaceholder"
-              color="accent"
-              class="drawer-el"
-            />
-          </q-item>
-        </div>
-        <AboutSection :show-banner="false" :show-description="false" />
-      </q-list>
-    </template>
-
-    <template v-slot:content>
       <q-dialog v-model="aboutDialogOpen">
         <q-card id="aboutDialogCard" dark>
           <AboutSection />
         </q-card>
       </q-dialog>
+    </template>
 
+    <template v-slot:mobile-drawer>
+      <div class="col" style="width: 100%">
+        <LogoImg style="width: inherit" class="default-margin-top" />
+        <div class="text-center default-margin-top">
+          <AppDescription />
+        </div>
+        <div
+          class="default-margin-top column justify-between"
+          style="height: 30%"
+        >
+          <FilterElements
+            v-model:type="currentType"
+            v-model:searchphrase="currentSearchphrase"
+            v-model:genre="currentGenre"
+            @update="updateFilteredItems"
+          />
+        </div>
+      </div>
+      <div class="col-auto">
+        <AboutSection :show-banner="false" :show-description="false" />
+      </div>
+    </template>
+
+    <template v-slot:content>
       <ItemList :items="filteredItems" ref="itemListComponent" />
     </template>
   </MainLayout>
@@ -122,19 +64,20 @@ import { staticJsonItemService } from 'src/services';
 import { ItemType } from 'components/models';
 import ItemList from 'components/ItemList.vue';
 import AboutSection from '../components/AboutSection.vue';
-import AppDescription from '../components/AppDescription.vue';
-import LogoImg from 'src/components/LogoImg.vue';
 import MainLayout from 'src/layouts/MainLayout.vue';
-import appConfig from 'src/appConfig';
+import FilterElements from 'src/components/FilterElements.vue';
+import LogoImg from 'src/components/LogoImg.vue';
+import AppDescription from 'src/components/AppDescription.vue';
 
 export default defineComponent({
   name: 'MainPage',
   components: {
     ItemList,
     AboutSection,
-    AppDescription,
-    LogoImg,
     MainLayout,
+    FilterElements,
+    LogoImg,
+    AppDescription,
   },
   setup() {
     const itemListComponent = ref<InstanceType<typeof ItemList> | null>(null);
@@ -142,13 +85,8 @@ export default defineComponent({
       null
     );
 
-    const drawerOpen = ref(false);
     const aboutDialogOpen = ref(false);
 
-    const searchFieldPlaceholder = appConfig.defaults.searchfieldPlaceholder;
-    const genreSelectPlaceholder = appConfig.defaults.genreSelectPlaceholder;
-
-    const genreOptions = ref(staticJsonItemService.getAllGenres());
     const typeOptions = ref([
       { label: 'All', value: ItemType.UNSPECIFIED },
       { label: 'Movies', value: ItemType.MOVIE },
@@ -169,15 +107,13 @@ export default defineComponent({
           currentSearchphrase.value
         );
 
-      drawerOpen.value = false;
       itemListComponent.value?.onItemListChange();
       mainLayoutComponent.value?.closeDrawer();
+      console.log('here=');
     }
 
     return {
-      drawerOpen,
       aboutDialogOpen,
-      genreOptions,
       typeOptions,
       currentGenre,
       currentType,
@@ -185,8 +121,6 @@ export default defineComponent({
       filteredItems,
       updateFilteredItems,
       itemListComponent,
-      searchFieldPlaceholder,
-      genreSelectPlaceholder,
     };
   },
 });
