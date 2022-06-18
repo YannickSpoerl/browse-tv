@@ -1,57 +1,50 @@
 <template>
   <MainLayout ref="mainLayoutComponent">
     <template v-slot:desktop-toolbar>
-      <q-toolbar class="header-el row justify-between">
-        <div class="col-3 header-el row">
-          <q-space />
-          <LogoImg class="header-el" />
-          <q-space />
-        </div>
-        <q-btn-toggle
-          v-model="currentType"
-          flat
-          dark
-          stretch
-          :options="typeOptions"
-          @update:model-value="updateFilteredItems"
-          toggle-color="accent"
-          :ripple="false"
-        />
-        <q-input
-          v-model="currentSearchphrase"
-          :label="searchFieldPlaceholder"
-          dark
-          dense
-          color="accent"
-          style="width: 20%; margin: 0 40px 0; min-width: 150px"
-          @update:model-value="updateFilteredItems"
-          debounce="1000"
-          clearable
-        >
-          <template v-slot:prepend>
-            <q-icon name="search" />
-          </template>
-        </q-input>
-        <q-select
-          dark
-          clearable
-          dense
-          v-model="currentGenre"
-          :options="genreOptions"
-          @update:model-value="updateFilteredItems"
-          :label="genreSelectPlaceholder"
-          color="accent"
-          style="width: 10%"
-        />
-        <q-space />
-        <q-btn
-          stretch
-          flat
-          class="gt-sm"
-          label="About"
-          @click="aboutDialogOpen = true"
-        />
-      </q-toolbar>
+      <q-btn-toggle
+        v-model="currentType"
+        flat
+        dark
+        stretch
+        :options="typeOptions"
+        @update:model-value="updateFilteredItems"
+        toggle-color="accent"
+        :ripple="false"
+      />
+      <q-input
+        v-model="currentSearchphrase"
+        :label="searchFieldPlaceholder"
+        dark
+        dense
+        color="accent"
+        style="width: 20%; margin: 0 40px 0; min-width: 150px"
+        @update:model-value="updateFilteredItems"
+        debounce="1000"
+        clearable
+      >
+        <template v-slot:prepend>
+          <q-icon name="search" />
+        </template>
+      </q-input>
+      <q-select
+        dark
+        clearable
+        dense
+        v-model="currentGenre"
+        :options="genreOptions"
+        @update:model-value="updateFilteredItems"
+        :label="genreSelectPlaceholder"
+        color="accent"
+        style="width: 10%"
+      />
+      <q-space />
+      <q-btn
+        stretch
+        flat
+        class="gt-sm"
+        label="About"
+        @click="aboutDialogOpen = true"
+      />
     </template>
 
     <template v-slot:mobile-drawer>
@@ -117,6 +110,7 @@
           <AboutSection />
         </q-card>
       </q-dialog>
+
       <ItemList :items="filteredItems" ref="itemListComponent" />
     </template>
   </MainLayout>
@@ -203,16 +197,6 @@ export default defineComponent({
   height: 45%;
   font-size: 18px;
 }
-
-.appHeader {
-  border-bottom: 1px solid #424246;
-  font-size: 1rem;
-}
-
-.header-el {
-  max-height: 56px;
-}
-
 .drawer-el {
   width: 90%;
 }

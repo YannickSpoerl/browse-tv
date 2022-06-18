@@ -1,10 +1,17 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-header class="gt-sm">
-      <slot name="desktop-toolbar"></slot>
+      <q-toolbar class="header-el row justify-between">
+        <div class="col-3 header-el row">
+          <q-space />
+          <LogoImg class="header-el" />
+          <q-space />
+        </div>
+        <slot name="desktop-toolbar"> </slot>
+      </q-toolbar>
     </q-header>
 
-    <q-header class="app-header lt-md">
+    <q-header class="lt-md">
       <q-toolbar class="header-el justify-between">
         <q-space />
         <LogoImg class="header-el" style="margin-left: 56px" />
@@ -23,7 +30,7 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="drawerOpen" overlay>
+    <q-drawer v-model="drawerOpen" class="text-secondary" overlay>
       <slot name="mobile-drawer"></slot>
     </q-drawer>
 
