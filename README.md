@@ -88,6 +88,7 @@ quasar build
 - [ ] Migrate from .json to sqlite
 - [ ] Lightweight backend to connect to and play movies
 - [ ] Script to add new items
+- [ ] Url-params to encode selected filters
 
 <!-- CONTRIBUTING -->
 
