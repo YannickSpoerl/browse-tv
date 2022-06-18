@@ -7,8 +7,7 @@ export class StaticJsonItemService implements ItemService {
     this.items = require('src/assets/database.json').sort(this.sortItems);
   }
 
-  // TODO: type annotation?
-  private sortItems(item1: Item, item2: Item) {
+  private sortItems(item1: Item, item2: Item): number {
     return ('' + item1.title).localeCompare(item2.title);
   }
 
