@@ -81,9 +81,6 @@ export default defineComponent({
   },
   setup() {
     const itemListComponent = ref<InstanceType<typeof ItemList> | null>(null);
-    const mainLayoutComponent = ref<InstanceType<typeof MainLayout> | null>(
-      null
-    );
 
     const aboutDialogOpen = ref(false);
 
@@ -108,8 +105,6 @@ export default defineComponent({
         );
 
       itemListComponent.value?.onItemListChange();
-      mainLayoutComponent.value?.closeDrawer();
-      console.log('here=');
     }
 
     return {

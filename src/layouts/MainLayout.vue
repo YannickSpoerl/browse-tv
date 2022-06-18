@@ -55,7 +55,6 @@ export default defineComponent({
 
     function closeDrawer(): void {
       drawerOpen.value = false;
-      console.log('pls close drawers2');
     }
 
     function openDrawer(): void {
