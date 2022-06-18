@@ -23,7 +23,7 @@
       />
 
       <q-dialog v-model="aboutDialogOpen">
-        <q-card id="aboutDialogCard" dark>
+        <q-card style="padding: 50px" bordered dark>
           <AboutSection />
         </q-card>
       </q-dialog>
@@ -84,14 +84,8 @@ export default defineComponent({
 
     const aboutDialogOpen = ref(false);
 
-    const typeOptions = ref([
-      { label: 'All', value: ItemType.UNSPECIFIED },
-      { label: 'Movies', value: ItemType.MOVIE },
-      { label: 'TV-shows', value: ItemType.SERIES },
-    ]);
-
     const currentGenre = ref('');
-    const currentType = ref(typeOptions.value[0].value);
+    const currentType = ref(ItemType.UNSPECIFIED);
     const currentSearchphrase = ref('');
 
     const filteredItems = ref(staticJsonItemService.getAllItems());
@@ -109,7 +103,6 @@ export default defineComponent({
 
     return {
       aboutDialogOpen,
-      typeOptions,
       currentGenre,
       currentType,
       currentSearchphrase,
@@ -120,13 +113,4 @@ export default defineComponent({
   },
 });
 </script>
-<style lang="scss">
-#aboutDialogCard {
-  width: 100%;
-  height: 45%;
-  font-size: 18px;
-}
-.drawer-el {
-  width: 90%;
-}
-</style>
+<style lang="scss"></style>

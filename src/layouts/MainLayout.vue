@@ -2,7 +2,7 @@
   <q-layout view="lHh Lpr lFf">
     <q-header class="gt-sm">
       <q-toolbar class="header-el row justify-between">
-        <slot name="desktop-toolbar"> </slot>
+        <slot name="desktop-toolbar"></slot>
       </q-toolbar>
     </q-header>
 
@@ -46,7 +46,6 @@ import LogoImg from 'src/components/LogoImg.vue';
 
 export default defineComponent({
   name: 'MainLayout',
-  emits: ['openMobileDrawer'],
   components: {
     LogoImg,
   },

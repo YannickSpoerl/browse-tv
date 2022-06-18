@@ -1,7 +1,10 @@
 <template>
-  <q-card class="el-preview" dark flat>
-    <q-img :alt="el.title + ' cover image'" loading="lazy" :src="el.image" />
-  </q-card>
+  <q-img
+    class="el-preview"
+    :alt="el.title + ' cover image'"
+    loading="lazy"
+    :src="el.image"
+  />
 </template>
 
 <script lang="ts">
@@ -24,13 +27,12 @@ export default defineComponent({
 <style lang="scss">
 .el-preview {
   width: 100%;
-  max-width: 23%;
+  max-width: 21%;
   min-width: 150px;
   max-height: 360px;
-  margin: 10px;
+  margin: 20px;
   cursor: pointer;
-  img {
-    width: 100%;
-  }
+  width: 100%;
+  border-radius: 5px;
 }
 </style>
