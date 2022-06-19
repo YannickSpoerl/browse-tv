@@ -14,7 +14,6 @@ export interface Item {
   imDbRating: string;
   keywords: string;
   tvSeriesInfo?: TVSeriesInfo;
-  fullFilePath?: string;
 }
 
 export enum ItemType {

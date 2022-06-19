@@ -92,25 +92,14 @@
               <q-item-label>Check on IMDB.com</q-item-label>
             </q-item-section>
           </q-item>
-          <div class="text-center">
-            <q-btn
-              v-if="isPlayable"
-              icon="play_arrow"
-              label="Play movie"
-              color="accent"
-              @click="playItem(el)"
-              style="margin-top: 10px"
-            />
-          </div>
         </q-list>
       </q-card-section>
     </q-card-section>
   </q-card>
 </template>
 <script lang="ts">
-import { defineComponent, PropType, ref } from 'vue';
+import { defineComponent, PropType } from 'vue';
 import { Item } from './models';
-import { remotePlayService } from 'src/services';
 
 export default defineComponent({
   name: 'AboutCard',
@@ -129,22 +118,6 @@ export default defineComponent({
       type: Object as PropType<Item>,
       required: true,
     },
-  },
-  setup(props) {
-    let isPlayable = ref(false);
-
-    remotePlayService.checkPlayable(props.el).then((result: boolean) => {
-      isPlayable.value = result;
-    });
-
-    function playItem(item: Item): void {
-      remotePlayService.playItem(item);
-    }
-
-    return {
-      isPlayable,
-      playItem,
-    };
   },
 });
 </script>

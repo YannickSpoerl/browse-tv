@@ -4,7 +4,7 @@ export class StaticJsonItemService implements ItemService {
   private items;
 
   public constructor() {
-    const items = require('src/assets/database2.json') as Record<string, Item>;
+    const items = require('src/assets/database.json') as Record<string, Item>;
     this.items = Object.values(items).sort(this.sortItems);
   }
 

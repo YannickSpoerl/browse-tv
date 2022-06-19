@@ -83,10 +83,7 @@ quasar build
 
 ## Tasks
 
-- [x] Add missing items
-- [x] Finish refactor and cleanup
-- [ ] Add file-path to database.json
-- [x] Lightweight backend to connect to and play movies
+- [ ] Finish refactor and cleanup
 - [ ] Script to add new items
 - [ ] Url-params to encode selected filters
 
