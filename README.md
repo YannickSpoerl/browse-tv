@@ -81,10 +81,21 @@ Build SPA:
 quasar build
 ```
 
+Add new item to database:
+
+- Add IMDB-API-key to _scan_item_to_database.py_
+
+- Get IMDB-id for new item
+
+- Run script with IMDB-id and path to database-file
+
+```sh
+./scan_item_to_database.py tt12805346 src/assets/database.json
+```
+
 ## Tasks
 
 - [ ] Finish refactor and cleanup
-- [ ] Script to add new items
 - [ ] Url-params to encode selected filters
 
 <!-- CONTRIBUTING -->
